@@ -59,7 +59,6 @@ with c2:
                 """
         )
 
-        st.stop()
 
 
 # We need to set up session state via st.session_state so that app interactions don't reset the app.
