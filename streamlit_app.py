@@ -109,33 +109,27 @@ with InfoTab:
 
 with MainTab:
 
-    # Then, we create a intro text for the app, which we wrap in a st.markdown() widget.
-    uploaded_file = st.file_uploader(
-        "",
-        key="1",
-        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
-    )
-
-    if uploaded_file is not None:
-        shows = pd.read_csv(uploaded_file)
-        shows_list = shows.iloc[:, 0].tolist()
-        shows_list_head = shows.iloc[:, 0].head(3).tolist()
-
-    st.write("")
-    st.markdown(
-        """
-    Classify keyphrases on the fly with this mighty app. No training needed!
-    """
-    )
-
-    st.write("")
-
-    # Now, we create a form via `st.form` to collect the user inputs.
-
-    # All widget values will be sent to Streamlit in batch.
-    # It makes the app faster!
-
     with st.form(key="my_form"):
+
+        uploaded_file = st.file_uploader(
+            "",
+            key="1",
+            help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
+        )
+
+        if uploaded_file is not None:
+            shows = pd.read_csv(uploaded_file)
+            shows_list = shows.iloc[:, 0].tolist()
+            shows_list_head = shows.iloc[:, 0].head(3).tolist()
+
+        st.write("")
+        st.markdown(
+            """
+        Classify keyphrases on the fly with this mighty app. No training needed!
+        """
+        )
+
+        st.write("")
 
         ############ ST TAGS ############
 
@@ -162,8 +156,6 @@ with MainTab:
         MAX_KEY_PHRASES = 50
 
         new_line = "\n"
-
-        pre_defined_keyphrases = shows_list_head
 
         # Python list comprehension to create a string from the list of keyphrases.
         keyphrases_string = f"{new_line.join(map(str, shows_list))}"
