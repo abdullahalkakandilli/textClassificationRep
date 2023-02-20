@@ -78,6 +78,53 @@ with c30:
 
         st.stop()
 
+############ 2. SETTING UP THE PAGE LAYOUT AND TITLE ############
+
+# `st.set_page_config` is used to display the default layout width, the title of the app, and the emoticon in the browser tab.
+
+st.set_page_config(
+    layout="centered", page_title="Zero-Shot Text Classifier", page_icon="❄️"
+)
+
+############ CREATE THE LOGO AND HEADING ############
+
+# We create a set of columns to display the logo and the heading next to each other.
+
+
+c1, c2 = st.columns([0.32, 2])
+
+# The snowflake logo will be displayed in the first column, on the left.
+
+with c1:
+
+    st.image(
+        "images/logo.png",
+        width=85,
+    )
+
+
+# The heading will be on the right.
+
+with c2:
+
+    st.caption("")
+    st.title("Zero-Shot Text Classifier")
+
+
+# We need to set up session state via st.session_state so that app interactions don't reset the app.
+
+if not "valid_inputs_received" in st.session_state:
+    st.session_state["valid_inputs_received"] = False
+
+
+############ SIDEBAR CONTENT ############
+
+st.sidebar.write("")
+
+# For elements to be displayed in the sidebar, we need to add the sidebar element in the widget.
+
+# We create a text input field for users to enter their API key.
+
 API_KEY = st.sidebar.text_input(
     "Enter your HuggingFace API key",
     help="Once you created you HuggingFace account, you can get your free API token in your settings page: https://huggingface.co/settings/tokens",
@@ -90,12 +137,49 @@ API_URL = "https://api-inference.huggingface.co/models/valhalla/distilbart-mnli-
 # Now, let's create a Python dictionary to store the API headers.
 headers = {"Authorization": f"Bearer {API_KEY}"}
 
+
 st.sidebar.markdown("---")
 
 
 # Let's add some info about the app to the sidebar.
 
-MainTab = st.tabs(["Main"])
+st.sidebar.write(
+    """
+App created by [Charly Wargnier](https://twitter.com/DataChaz) using [Streamlit](https://streamlit.io/)🎈 and [HuggingFace](https://huggingface.co/inference-api)'s [Distilbart-mnli-12-3](https://huggingface.co/valhalla/distilbart-mnli-12-3) model.
+"""
+)
+
+
+############ TABBED NAVIGATION ############
+
+# First, we're going to create a tabbed navigation for the app via st.tabs()
+# tabInfo displays info about the app.
+# tabMain displays the main app.
+
+MainTab, InfoTab = st.tabs(["Main", "Info"])
+
+with InfoTab:
+
+    st.subheader("What is Streamlit?")
+    st.markdown(
+        "[Streamlit](https://streamlit.io) is a Python library that allows the creation of interactive, data-driven web applications in Python."
+    )
+
+    st.subheader("Resources")
+    st.markdown(
+        """
+    - [Streamlit Documentation](https://docs.streamlit.io/)
+    - [Cheat sheet](https://docs.streamlit.io/library/cheatsheet)
+    - [Book](https://www.amazon.com/dp/180056550X) (Getting Started with Streamlit for Data Science)
+    """
+    )
+
+    st.subheader("Deploy")
+    st.markdown(
+        "You can quickly deploy Streamlit apps using [Streamlit Community Cloud](https://streamlit.io/cloud) in just a few clicks."
+    )
+
+
 with MainTab:
 
     # Then, we create a intro text for the app, which we wrap in a st.markdown() widget.
@@ -148,7 +232,6 @@ with MainTab:
 
         # Python list comprehension to create a string from the list of keyphrases.
         keyphrases_string = f"{new_line.join(map(str, shows_list))}"
-
 
         # The block of code below displays a text area
         # So users can paste their phrases to classify
