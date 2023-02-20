@@ -23,7 +23,7 @@ st.set_page_config(page_icon="✂️", page_title="CSV Wrangler")
 
 st.title("CSV Wrangler")
 
-c1, c2, c3 = st.columns([1, 6, 2])
+c1, c2 = st.columns([1, 6])
 
 
 
@@ -49,19 +49,6 @@ with c2:
         )
 
         st.stop()
-
-
-# The snowflake logo will be displayed in the first column, on the left.
-
-with c1:
-
-    st.image(
-        "images/logo.png",
-        width=85,
-    )
-
-
-# The heading will be on the right.
 
 with c2:
 
@@ -99,21 +86,11 @@ headers = {"Authorization": f"Bearer {API_KEY}"}
 st.sidebar.markdown("---")
 
 
-# Let's add some info about the app to the sidebar.
-
-st.sidebar.write(
-    """
-App created by [Charly Wargnier](https://twitter.com/DataChaz) using [Streamlit](https://streamlit.io/)🎈 and [HuggingFace](https://huggingface.co/inference-api)'s [Distilbart-mnli-12-3](https://huggingface.co/valhalla/distilbart-mnli-12-3) model.
-"""
-)
-
-
 ############ TABBED NAVIGATION ############
 
 # First, we're going to create a tabbed navigation for the app via st.tabs()
 # tabInfo displays info about the app.
 # tabMain displays the main app.
-
 MainTab, InfoTab = st.tabs(["Main", "Info"])
 
 with InfoTab:
@@ -344,7 +321,7 @@ with MainTab:
         # Display the dataframe
         st.write(df)
 
-        cs, c4 = st.columns([2, 2])
+        cs, c1 = st.columns([2, 2])
 
 
 
@@ -368,3 +345,5 @@ with MainTab:
                 file_name="classification_results.csv",
                 mime="text/csv",
             )
+
+
