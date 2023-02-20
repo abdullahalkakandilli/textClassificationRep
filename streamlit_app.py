@@ -100,21 +100,7 @@ with c2:
 
     st.write("")
 
-    # Now, we create a form via `st.form` to collect the user inputs.
-
-    # All widget values will be sent to Streamlit in batch.
-    # It makes the app faster!
-
     with st.form(key="my_form"):
-
-        ############ ST TAGS ############
-
-        # We initialize the st_tags component with default "labels"
-
-        # Here, we want to classify the text into one of the following user intents:
-        # Transactional
-        # Informational
-        # Navigational
 
         labels_from_st_tags = st_tags(
             value=["Transactional", "Informational", "Navigational"],
@@ -170,6 +156,8 @@ with c2:
         linesList = list(dict.fromkeys(linesList))  # Removes dupes
         linesList = list(filter(None, linesList))  # Removes empty lines
 
+        submit_button = st.form_submit_button(label="Submit")
+
         if len(linesList) > MAX_KEY_PHRASES:
             st.info(
                 f"❄️ Note that only the first "
@@ -178,8 +166,8 @@ with c2:
             )
 
             linesList = linesList[:MAX_KEY_PHRASES]
-
         submit_button = st.form_submit_button(label="Submit")
+
 
     ############ CONDITIONAL STATEMENTS ############
 
