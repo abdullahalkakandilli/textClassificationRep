@@ -51,8 +51,6 @@ with c2:
         st.stop()
 
 
-c4, c5 = st.columns([0.32, 2])
-
 # The snowflake logo will be displayed in the first column, on the left.
 
 with c1:
