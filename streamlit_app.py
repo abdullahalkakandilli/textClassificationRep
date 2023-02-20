@@ -18,14 +18,15 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-st.set_page_config(page_icon="✂️", page_title="CSV Wrangler")
+st.set_page_config(page_icon="✂️", page_title="Zero-shot Text")
 
-
-st.title("CSV Wrangler")
 
 c1, c2 = st.columns([1, 6])
 
+with c2:
 
+    st.caption("")
+    st.title("Upload CSV file")
 
 with c2:
 
@@ -86,36 +87,7 @@ headers = {"Authorization": f"Bearer {API_KEY}"}
 st.sidebar.markdown("---")
 
 
-############ TABBED NAVIGATION ############
-
-# First, we're going to create a tabbed navigation for the app via st.tabs()
-# tabInfo displays info about the app.
-# tabMain displays the main app.
-MainTab, InfoTab = st.tabs(["Main", "Info"])
-
-with InfoTab:
-
-    st.subheader("What is Streamlit?")
-    st.markdown(
-        "[Streamlit](https://streamlit.io) is a Python library that allows the creation of interactive, data-driven web applications in Python."
-    )
-
-    st.subheader("Resources")
-    st.markdown(
-        """
-    - [Streamlit Documentation](https://docs.streamlit.io/)
-    - [Cheat sheet](https://docs.streamlit.io/library/cheatsheet)
-    - [Book](https://www.amazon.com/dp/180056550X) (Getting Started with Streamlit for Data Science)
-    """
-    )
-
-    st.subheader("Deploy")
-    st.markdown(
-        "You can quickly deploy Streamlit apps using [Streamlit Community Cloud](https://streamlit.io/cloud) in just a few clicks."
-    )
-
-
-with MainTab:
+with c2:
 
     # Then, we create a intro text for the app, which we wrap in a st.markdown() widget.
 
