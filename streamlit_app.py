@@ -110,6 +110,29 @@ with InfoTab:
 with MainTab:
 
     # Then, we create a intro text for the app, which we wrap in a st.markdown() widget.
+    uploaded_file = st.file_uploader(
+        "",
+        key="1",
+        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
+    )
+
+    if uploaded_file is not None:
+        file_container = st.expander("Check your uploaded .csv")
+        shows = pd.read_csv(uploaded_file)
+        uploaded_file.seek(0)
+        file_container.write(shows)
+
+    else:
+        st.info(
+            f"""
+                👆 Upload a .csv file first. Sample to try: [biostats.csv](https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv)
+                """
+        )
+
+        st.stop()
+
+    shows_list = shows.iloc[:, 0].tolist()
+    shows_list_head = shows.iloc[:, 0].head(3).tolist()
 
     st.write("")
     st.markdown(
@@ -153,16 +176,10 @@ with MainTab:
 
         new_line = "\n"
 
-        pre_defined_keyphrases = [
-            "I want to buy something",
-            "We have a question about a product",
-            "I want a refund through the Google Play store",
-            "Can I have a discount, please",
-            "Can I have the link to the product page?",
-        ]
+        pre_defined_keyphrases = shows_list_head
 
         # Python list comprehension to create a string from the list of keyphrases.
-        keyphrases_string = f"{new_line.join(map(str, pre_defined_keyphrases))}"
+        keyphrases_string = f"{new_line.join(map(str, shows_list))}"
 
         # The block of code below displays a text area
         # So users can paste their phrases to classify
