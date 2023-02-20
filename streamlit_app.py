@@ -129,8 +129,6 @@ with MainTab:
                 """
         )
 
-        st.stop()
-
     shows_list = shows.iloc[:, 0].tolist()
     shows_list_head = shows.iloc[:, 0].head(3).tolist()
 
