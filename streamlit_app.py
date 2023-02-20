@@ -116,9 +116,10 @@ with MainTab:
             key="1",
             help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
         )
-
+        shows_list = []
         if uploaded_file is not None:
             shows = pd.read_csv(uploaded_file)
+            shows_list = shows.iloc[:, 0].tolist()
         st.write("")
         st.markdown(
             """
@@ -155,7 +156,7 @@ with MainTab:
         new_line = "\n"
 
         # Python list comprehension to create a string from the list of keyphrases.
-        keyphrases_string = f"{new_line.join(map(str, shows.iloc[:, 0].tolist()))}"
+        keyphrases_string = f"{new_line.join(map(str, shows_list))}"
 
         # The block of code below displays a text area
         # So users can paste their phrases to classify
