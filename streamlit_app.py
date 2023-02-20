@@ -20,40 +20,12 @@ def _max_width_():
 
 st.set_page_config(page_icon="✂️", page_title="CSV Wrangler")
 
-# st.image("https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/balloon_1f388.png", width=100)
-st.image(
-    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/scissors_2702-fe0f.png",
-    width=100,
-)
 
 st.title("CSV Wrangler")
 
-# st.caption(
-#     "PRD : TBC | Streamlit Ag-Grid from Pablo Fonseca: https://pypi.org/project/streamlit-aggrid/"
-# )
+c1, c2, c3 = st.columns([1, 6, 2])
 
 
-# ModelType = st.radio(
-#     "Choose your model",
-#     ["Flair", "DistilBERT (Default)"],
-#     help="At present, you can choose between 2 models (Flair or DistilBERT) to embed your text. More to come!",
-# )
-
-# with st.expander("ToDo's", expanded=False):
-#     st.markdown(
-#         """
-# -   Add pandas.json_normalize() - https://streamlit.slack.com/archives/D02CQ5Z5GHG/p1633102204005500
-# -   **Remove 200 MB limit and test with larger CSVs**. Currently, the content is embedded in base64 format, so we may end up with a large HTML file for the browser to render
-# -   **Add an encoding selector** (to cater for a wider array of encoding types)
-# -   **Expand accepted file types** (currently only .csv can be imported. Could expand to .xlsx, .txt & more)
-# -   Add the ability to convert to pivot → filter → export wrangled output (Pablo is due to change AgGrid to allow export of pivoted/grouped data)
-# 	    """
-#     )
-# 
-#     st.text("")
-
-
-c1, c2, c3 = st.columns([1, 6, 1])
 
 with c2:
 
@@ -78,20 +50,12 @@ with c2:
 
         st.stop()
 
-############ 2. SETTING UP THE PAGE LAYOUT AND TITLE ############
-
-# `st.set_page_config` is used to display the default layout width, the title of the app, and the emoticon in the browser tab.
-
-############ CREATE THE LOGO AND HEADING ############
-
-# We create a set of columns to display the logo and the heading next to each other.
-
 
 c4, c5 = st.columns([0.32, 2])
 
 # The snowflake logo will be displayed in the first column, on the left.
 
-with c4:
+with c1:
 
     st.image(
         "images/logo.png",
@@ -101,7 +65,7 @@ with c4:
 
 # The heading will be on the right.
 
-with c5:
+with c2:
 
     st.caption("")
     st.title("Zero-Shot Text Classifier")
