@@ -38,6 +38,30 @@ with c2:
     st.title("Zero-Shot Text Classifier")
 
 
+with c2:
+
+    uploaded_file = st.file_uploader(
+        "",
+        key="1",
+        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
+    )
+
+    if uploaded_file is not None:
+        file_container = st.expander("Check your uploaded .csv")
+        shows = pd.read_csv(uploaded_file)
+        uploaded_file.seek(0)
+        file_container.write(shows)
+
+    else:
+        st.info(
+            f"""
+                👆 Upload a .csv file first. Sample to try: [biostats.csv](https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv)
+                """
+        )
+
+        st.stop()
+
+
 # We need to set up session state via st.session_state so that app interactions don't reset the app.
 
 if not "valid_inputs_received" in st.session_state:
@@ -109,25 +133,23 @@ with InfoTab:
 
 with MainTab:
 
-    with st.form(key="my_form"):
+    # Then, we create a intro text for the app, which we wrap in a st.markdown() widget.
 
-        uploaded_file = st.file_uploader(
-            "",
-            key="1",
-            help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
-        )
-        shows_list = []
-        if uploaded_file is not None:
-            shows = pd.read_csv(uploaded_file)
-            shows_list = shows.iloc[:, 0].tolist()
-        st.write("")
-        st.markdown(
-            """
-        Classify keyphrases on the fly with this mighty app. No training needed!
+    st.write("")
+    st.markdown(
         """
-        )
+    Classify keyphrases on the fly with this mighty app. No training needed!
+    """
+    )
 
-        st.write("")
+    st.write("")
+
+    # Now, we create a form via `st.form` to collect the user inputs.
+
+    # All widget values will be sent to Streamlit in batch.
+    # It makes the app faster!
+
+    with st.form(key="my_form"):
 
         ############ ST TAGS ############
 
@@ -343,5 +365,3 @@ with MainTab:
                 file_name="classification_results.csv",
                 mime="text/csv",
             )
-
-
