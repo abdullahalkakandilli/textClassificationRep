@@ -53,9 +53,9 @@ st.title("CSV Wrangler")
 #     st.text("")
 
 
-c29, c30, c31 = st.columns([1, 6, 1])
+c1, c2, c3 = st.columns([1, 6, 1])
 
-with c30:
+with c2:
 
     uploaded_file = st.file_uploader(
         "",
@@ -82,20 +82,16 @@ with c30:
 
 # `st.set_page_config` is used to display the default layout width, the title of the app, and the emoticon in the browser tab.
 
-st.set_page_config(
-    layout="centered", page_title="Zero-Shot Text Classifier", page_icon="❄️"
-)
-
 ############ CREATE THE LOGO AND HEADING ############
 
 # We create a set of columns to display the logo and the heading next to each other.
 
 
-c1, c2 = st.columns([0.32, 2])
+c4, c5 = st.columns([0.32, 2])
 
 # The snowflake logo will be displayed in the first column, on the left.
 
-with c1:
+with c4:
 
     st.image(
         "images/logo.png",
@@ -105,7 +101,7 @@ with c1:
 
 # The heading will be on the right.
 
-with c2:
+with c5:
 
     st.caption("")
     st.title("Zero-Shot Text Classifier")
@@ -386,7 +382,7 @@ with MainTab:
         # Display the dataframe
         st.write(df)
 
-        cs, c1 = st.columns([2, 2])
+        cs, c4 = st.columns([2, 2])
 
 
 
