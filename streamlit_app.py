@@ -155,8 +155,16 @@ with MainTab:
 
         new_line = "\n"
 
+        pre_defined_keyphrases = [
+            "I want to buy something",
+            "We have a question about a product",
+            "I want a refund through the Google Play store",
+            "Can I have a discount, please",
+            "Can I have the link to the product page?",
+        ]
+
         # Python list comprehension to create a string from the list of keyphrases.
-        keyphrases_string = f"{new_line.join(map(str, shows_list))}"
+        keyphrases_string = f"{new_line.join(map(str, pre_defined_keyphrases))}"
 
         # The block of code below displays a text area
         # So users can paste their phrases to classify
