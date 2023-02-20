@@ -117,20 +117,9 @@ with MainTab:
     )
 
     if uploaded_file is not None:
-        file_container = st.expander("Check your uploaded .csv")
         shows = pd.read_csv(uploaded_file)
-        uploaded_file.seek(0)
-        file_container.write(shows)
-
-    else:
-        st.info(
-            f"""
-                👆 Upload a .csv file first. Sample to try: [biostats.csv](https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv)
-                """
-        )
-
-    shows_list = shows.iloc[:, 0].tolist()
-    shows_list_head = shows.iloc[:, 0].head(3).tolist()
+        shows_list = shows.iloc[:, 0].tolist()
+        shows_list_head = shows.iloc[:, 0].head(3).tolist()
 
     st.write("")
     st.markdown(
