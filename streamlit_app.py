@@ -3,6 +3,8 @@ import requests
 import pandas as pd
 import numpy as np
 from streamlit_tags import st_tags  # to add labels on the fly!
+from bokeh.plotting import figure
+
 
 
 ############ 2. SETTING UP THE PAGE LAYOUT AND TITLE ############
@@ -18,32 +20,24 @@ st.set_page_config(
 # We create a set of columns to display the logo and the heading next to each other.
 
 
-c1, c2 = st.columns([0.32, 2])
+c1, c2, c3 = st.columns([4, 6,1])
 
 # The snowflake logo will be displayed in the first column, on the left.
 
+
 with c2:
+    x = [1, 2, 3, 4, 5]
+    y = [6, 7, 2, 4, 5]
 
-    uploaded_file = st.file_uploader(
-        "",
-        key="1",
-        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
-    )
+    p = figure(
+        title='simple line example',
+        x_axis_label='x',
+        y_axis_label='y')
 
-    if uploaded_file is not None:
-        file_container = st.expander("Check your uploaded .csv")
-        shows = pd.read_csv(uploaded_file)
-        uploaded_file.seek(0)
-        file_container.write(shows)
+    p.line(x, y, legend_label='Trend', line_width=2)
 
-    else:
-        st.info(
-            f"""
-                👆 Upload a .csv file first. Sample to try: [biostats.csv](https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv)
-                """
-        )
+    st.bokeh_chart(p, use_container_width=True)
 
-        st.stop()
 
 # We need to set up session state via st.session_state so that app interactions don't reset the app.
 
