@@ -22,21 +22,6 @@ c1, c2 = st.columns([0.32, 2])
 
 # The snowflake logo will be displayed in the first column, on the left.
 
-with c1:
-
-    st.image(
-        "images/logo.png",
-        width=85,
-    )
-
-
-# The heading will be on the right.
-
-with c2:
-
-    st.caption("")
-    st.title("Zero-Shot Text Classifier")
-
 with c2:
 
     uploaded_file = st.file_uploader(
